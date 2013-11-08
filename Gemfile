@@ -32,6 +32,20 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'httparty'
+gem 'google-api-client'
+gem 'omniauth-google-oauth2'
+
+gem 'passenger'
+gem 'bourbon'
+gem 'angularjs-rails'
+
+group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
