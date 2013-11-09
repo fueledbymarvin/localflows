@@ -17,8 +17,13 @@ class User < ActiveRecord::Base
 
         user.gclient(user.gaccess)
         user.gcal
+        user.eventful
         
         return user
+    end
+
+    def eventful
+        @eventful ||= Eventful::API.new ENV['eventful_key']
     end
 
     def gclient(token)
@@ -160,8 +165,6 @@ class User < ActiveRecord::Base
     					if event['postal_code']
     						newEvent[field] += " #{event['postal_code']}"
     					end
-    				elsif(field == "description" && event["description"])
-    					newEvent[field] = event[field]
     				else
     					newEvent[field] = event[field]
     				end
