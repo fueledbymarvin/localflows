@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_filter :authenticated
 
     def index
       @users = User.all
@@ -17,7 +18,6 @@ class UsersController < ApplicationController
 
         user.save
 
-        # raise params.to_yaml
         redirect_to :root
     end
 
