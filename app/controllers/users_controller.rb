@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-    before_filter :authenticated
+    before_filter :authenticated, except: [:new]
+
+    def new
+        redirect_to "/auth/google?origin=#{params[:city]},#{params[:state]}"
+    end
 
     def index
       @users = User.all

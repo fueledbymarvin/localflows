@@ -6,5 +6,7 @@ Localflows::Application.routes.draw do
 
   match 'search', to: "users#eventful", as: "search", via: [:get]
 
+  match 'new', to: "users#new", as: "new", via: [:get]
+
   resources :users
  end
