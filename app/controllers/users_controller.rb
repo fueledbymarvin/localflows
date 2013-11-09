@@ -25,11 +25,17 @@ class UsersController < ApplicationController
         redirect_to :root
     end
 
+    def current_emails
+        @emails = params[:search][:users].scan(/\((.+?)\)/).collect {|x| x[0] }
+    end
+
     def eventful
         timeframe = params[:timeframe][:start].delete('-') +
                     '00-' + params[:timeframe][:end].delete('-') + '00'
-        emails = params[:search][:users].scan(/\((.+?)\)/).collect {|x| x[0] }
-        @nFriends = emails.length + 1
+
+        # emails = params[:search][:users].scan(/\((.+?)\)/).collect {|x| x[0] }
+
+        @nFriends = current_emails.length + 1
 
         events = current_user.eventful.call('events/search', {
             date: timeframe,
@@ -43,6 +49,16 @@ class UsersController < ApplicationController
             @events = nil
         else
             @events = current_user.group(Date.parse(params[:timeframe][:start]), Date.parse(params[:timeframe][:end]), emails, events["event"])
+        end
+
+        raise
+    end
+
+    ## this action will send an email through event_confirmation mailer
+    ## it will be linked to from the page listing search results
+    def confirm_event(current_emails)
+        current_emails.each do |email|
+            UserMailer.event_confirmation(email).deliver
         end
     end
 end
