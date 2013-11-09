@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     ## it will be linked to from the page listing search results
     def confirm_event(current_emails)
         current_emails.each do |email|
-            raise
+            # raise
             UserMailer.event_confirmation(current_user, params["event-title"], params["event-description"], email).deliver
 
         end
