@@ -4,4 +4,7 @@ Localflows::Application.routes.draw do
   match 'auth/failure', to: redirect('/'), via: [:get]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get]
 
+  match 'search', to: "users#eventful", as: "search", via: [:get]
+
+  resources :users
  end

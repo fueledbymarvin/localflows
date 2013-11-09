@@ -37,6 +37,9 @@ gem 'google-api-client'
 gem 'omniauth-google-oauth2'
 gem 'eventfulapi'
 
+gem 'simple_form'
+gem 'bootstrap-sass'
+
 gem 'passenger'
 gem 'bourbon'
 gem 'angularjs-rails'

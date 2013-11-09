@@ -1,8 +1,26 @@
+<% if current_user %>
+
 <section id="user_nav">
-  <% if current_user %>
-    Welcome <%= current_user.name %>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Google", "/auth/google", id: "sign_in" %>
+  Welcome <%= current_user.name %>!
+  <%= link_to "Sign out", signout_path, id: "sign_out" %>
+</div>
+
+<section id="search-events">
+  <%= form_tag("/search", method: "get") do %>
+    <%= label_tag(:q, "Timeframe:") %>
+    <%= text_field_tag(:timeframe) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+
+</div>
+
+<div>
+  <% unless [current_user.city, current_user.state].all? %>
+      <%= render partial: "form" %>
   <% end %>
 </div>
+
+<% else %>
+  <%= link_to "Sign in with Google", "/auth/google", id: "sign_in" %>
+
+<% end %>
