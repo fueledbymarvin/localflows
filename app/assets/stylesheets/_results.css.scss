@@ -1,23 +1,14 @@
-#resultbox {
-  position: relative;
-  top: 35%;
-  left: 33%;
-  width: 35%;
-  background:rgba(168,168,168,0.3);
-  border-radius: 0.5em;
-}
-#resultboxtext {
-  padding-top: 0.5em;
-  padding-left: 0.5em;
-  padding-bottom: 0.5em;
+.resultboxtext {
   font-size: 1.8em;
   font-weight: bold;
 }
-#resultboxtext, .event{
+.resultboxtext, .event{
   color: white;
   font-family: Lato, sans-serif;
 }
-
+.eventbox {
+  margin: 2em 0;
+}
 .event{
   padding-left: 0.5em;
   padding-top: 0.5em;
@@ -26,56 +17,30 @@
   font-weight: bold;
   font-size: 1.2em;
 }
+.description {
+  clear: both;
+}
 .eventimg {
-  position: relative;
-  top: -2em;
-  margin-right: 1em;
+  display: inline;
+  width: 8em;
   border-radius: 0.5em;
+  border: 0.5em white solid;
+  float: left;
+  margin-right: 1em;
 }
-#fuckcss{
-  margin-top: -1em;
-  margin-bottom: -0.3em;
+.invitebutton{
+  margin: 0 0 0.5em;
 }
-.venue {
-  position: relative;
-  top: -0.5em;
-  width: 100%;
-}
-.time {
-  position: relative;
-  top: 1.5em;
-}
-.venue, .time, .availability {
-  display: inline-block;
-}
-
-.small-profile-pic{
-  height: 1.4em;
-  width; auto;
-}
-
-.friend-images{
-  display: inline-block;
-}
-.profile-pic {
-  display: inline-block;
-  position: relative;
-  top:-2em;
-  height: 4em;
-  width: auto;
-}
-.see-more-people{
-  display: inline-block;
-  position: relative;
-  top: -1.4em;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-.description{
-  position: relative;
-  margin-top: -2em;
-}
-
-.invite-button{
-  margin-bottom: 0.5em;
+.friend-images {
+  p {
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 0.3em;
+    border: 0.3em white solid;
+  }
+  img {
+    border-radius: 0.3em;
+    border: 0.3em white solid;
+    height: 58px;
+  }
 }
