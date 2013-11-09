@@ -12,7 +12,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       image_aspect_ratio: "square",
       image_size: 60,
       access_type: "offline",
-      redirect_uri:'http://localhost:3000/auth/google/callback'
+      redirect_uri:'http://localflows.herokuapp.com/auth/google/callback'
     }
 	#client_options: { :ssl => { :ca_file => '/usr/lib/ssl/certs/ca-certificates.crt' } }
 end
