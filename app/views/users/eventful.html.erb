@@ -1,13 +1,29 @@
 <%= current_user.city %>
-
+<% count = 0 %>
 <% @events["events"]["event"].each do |f|%>
     <ul>
         <b><%= f["title"] %></b>
         <br>
-        <%= f["description"] %>
+        <% unless f["description"].nil? %>
+        <%= f["description"].html_safe %>
+        <% end %>
         <br>
         <%= f["start_time"] %>
         <br>
         <%= f["stop_time"] %>
+        <br>
+        <%= f["venue_name"].upcase %>
+        <br>
+        <%= f["venue_address"].upcase %>
+        <br>
+        <%= f["city_name"].upcase %>
+        <br>
+        <%= f["region_abbr"].upcase %>
+        <br>
+        <% if f["postal_code"].nil? %>
+        	<% count += 1 %>
+        <% end %>
+        <%= f["postal_code"] %>
+        <%= count %>
     </ul>
 <% end %>
