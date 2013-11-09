@@ -1,0 +1,13 @@
+<%= current_user.city %>
+
+<% @events["events"]["event"].each do |f|%>
+    <ul>
+        <b><%= f["title"] %></b>
+        <br>
+        <%= f["description"] %>
+        <br>
+        <%= f["start_time"] %>
+        <br>
+        <%= f["stop_time"] %>
+    </ul>
+<% end %>

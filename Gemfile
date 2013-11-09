@@ -33,9 +33,12 @@ group :doc do
 end
 
 gem 'httparty'
-gem 'google-api-client', :require => 'google/api_client'
+gem 'google-api-client', require: 'google/api_client'
 gem 'omniauth-google-oauth2'
-gem 'eventfulapi'
+gem 'eventfulapi', require: 'eventful/api'
+
+gem 'simple_form'
+gem 'bootstrap-sass'
 
 gem 'passenger'
 gem 'bourbon'
