@@ -1,11 +1,18 @@
 class User < ActiveRecord::Base
 
     def self.from_omniauth(auth)
-        p auth
-        # where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-        #   #stuff
-        #   user.save!
-        # end
+        user = find_or_initialize_by(gid: auth.extra.raw_info.uid)
+
+        user.name = auth.extra.raw_info.name
+        user.email = auth.extra.raw_info.email
+        user.image = auth.extra.raw_info.picture
+
+        user.gaccess = auth.credentials.token
+        user.grefresh = auth.credentials.refresh_token
+
+        user.save
+        
+        return user
     end
 
     def google
