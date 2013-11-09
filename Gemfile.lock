@@ -53,6 +53,8 @@ GEM
     daemon_controller (1.1.7)
     debug_inspector (0.0.2)
     erubis (2.7.0)
+    eventfulapi (2.2.1)
+      mime-types (> 0.0.0)
     execjs (2.0.2)
     extlib (0.9.16)
     faraday (0.8.8)
@@ -187,6 +189,7 @@ DEPENDENCIES
   binding_of_caller
   bourbon
   coffee-rails (~> 4.0.0)
+  eventfulapi
   google-api-client
   httparty
   jbuilder (~> 1.2)
