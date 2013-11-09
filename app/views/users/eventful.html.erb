@@ -1,25 +1,27 @@
-<%= current_user.city %>
-
-<% @events.each do |event|%>
-    <article class="event">
-        <p class="title"><%= event["title"] %></p>
-        <img class="eventimg" src="<%= event['image'] %>" />
-        <p class="start_time"><%= event["start_time"].strftime("%A, %B %e, %Y, %H:%M%p") %></p>
-        <p class="stop_time">
-            <% if event["stop_time"].nil? %>
-                No end time found.
-            <% else %>
-                <%= event["stop_time"].strftime("%A, %B %e, %Y, %H:%M%p") %>
-            <% end %>
-        <p class="venue"><%= event["venue"].html_safe %></p>
-        <p class="description">
-            <% if event["description"].nil? %>
-                No description available.
-            <% else %>
-                <%= event["description"].html_safe %>
-            <% end %>
-        </p>
-        <p class="url"><a href="<%= event["url"] %>" target="_blank">More info</a>.</p>
-        <p class="availability"><%= "#{event['available'].length}/#{@nFriends}" %></p>
-    </article>
+<% if !@events.nil? %>
+    <% @events.each do |event|%>
+        <article class="event">
+            <p class="title"><%= event["title"] %></p>
+            <img class="eventimg" src="<%= event['image'] %>" />
+            <p class="start_time"><%= event["start_time"].strftime("%A, %B %e, %Y, %H:%M%p") %></p>
+            <p class="stop_time">
+                <% if event["stop_time"].nil? %>
+                    No end time found.
+                <% else %>
+                    <%= event["stop_time"].strftime("%A, %B %e, %Y, %H:%M%p") %>
+                <% end %>
+            <p class="venue"><%= event["venue"].html_safe %></p>
+            <p class="description">
+                <% if event["description"].nil? %>
+                    No description available.
+                <% else %>
+                    <%= event["description"].html_safe %>
+                <% end %>
+            </p>
+            <p class="url"><a href="<%= event["url"] %>" target="_blank">More info</a>.</p>
+            <p class="availability"><%= "#{event['available'].length}/#{@nFriends}" %></p>
+        </article>
+    <% end %>
+<% else %>
+    No events.
 <% end %>

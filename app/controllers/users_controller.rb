@@ -33,8 +33,12 @@ class UsersController < ApplicationController
             page_size: 100,
             sort_order: "popularity",
             keywords: params[:search][:keyword]
-        })["events"]["event"]
+        })["events"]
 
-        @events = current_user.group(Date.parse(params[:timeframe][:start]), Date.parse(params[:timeframe][:end]), emails, events)
+        if(events.nil?)
+            @events = nil
+        else
+            @events = current_user.group(Date.parse(params[:timeframe][:start]), Date.parse(params[:timeframe][:end]), emails, events["event"])
+        end
     end
 end
