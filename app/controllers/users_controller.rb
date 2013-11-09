@@ -26,9 +26,7 @@ class UsersController < ApplicationController
                     '00-' + params[:timeframe][:end].delete('-') + '00'
 
         # timeframe must be in the form 'YYYYMMDD00-YYYYMMDD00'
-        eventful = Eventful::API.new ENV['eventful_key']
-
-        events = eventful.call('events/search', {
+        events = current_user.eventful.call('events/search', {
             date: timeframe,
             location: "#{current_user.city}, #{current_user.state}",
             page_size: 100,

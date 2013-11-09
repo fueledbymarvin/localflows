@@ -154,7 +154,7 @@ class User < ActiveRecord::Base
     end
 
     def prune(events)
-    	fields = ["title", "start_time", "stop_time", "url", "description", "venue"]
+    	fields = ["title", "start_time", "stop_time", "url", "description", "venue", "image"]
     	newEvents = []
     	events.each do |event|
     		if(event["stop_time"].nil? || !event["stop_time"].nil? && event["start_time"].strftime("%D") == event["stop_time"].strftime("%D"))
@@ -165,7 +165,9 @@ class User < ActiveRecord::Base
     					if event['postal_code']
     						newEvent[field] += " #{event['postal_code']}"
     					end
-    				else
+    				elsif field == "image" && !event["image"].nil?
+                        newEvent[field] = event["image"]["medium"]["url"]
+                    else
     					newEvent[field] = event[field]
     				end
     			end

@@ -3,6 +3,11 @@
 <% @events.each do |event|%>
     <article class="event">
         <p class="title"><%= event["title"] %></p>
+        <% if event["image"].nil? %>
+            <img class="eventimg" src="<%= someshit %>" />
+        <% else %>
+            <img class="eventimg" src="<%= event['image'] %>" />
+        <% end %>
         <p class="start_time"><%= event["start_time"].strftime("") %></p>
         <p class="stop_time"><%= event["stop_time"].strftime("") %></p>
         <p class="venue"><%= event["venue"] %></p>
