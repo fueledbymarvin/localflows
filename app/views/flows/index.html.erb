@@ -3,7 +3,7 @@
 <section id="user_nav">
   Welcome <%= current_user.name %>!
   <%= link_to "Sign out", signout_path, id: "sign_out" %>
-</div>
+</section>
 
 <section id="search-events">
   <%= form_tag("/search", method: "get") do %>
@@ -11,8 +11,7 @@
     <%= text_field_tag(:timeframe) %>
     <%= submit_tag("Search") %>
   <% end %>
-
-</div>
+</section>
 
 <div>
   <% unless [current_user.city, current_user.state].all? %>
