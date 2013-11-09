@@ -3,7 +3,7 @@ require 'eventful/api'
 class UsersController < ApplicationController
 
     def index
-      @users = User.where("name like ?", "%#{params[:q]}%")
+      @users = User.all
       respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @users }
@@ -24,8 +24,14 @@ class UsersController < ApplicationController
     end
 
     def eventful
+
         timeframe = params[:timeframe][:start].delete('-') +
                     '00-' + params[:timeframe][:end].delete('-') + '00'
+
+        emails = params[:search][:users].scan(/\((.+?)\)/).collect {|x| x[0] }
+        emails = emails.map {|email| User.where(email: email)}
+        emails = emails.map {|email| email.id}
+
 
         # timeframe must be in the form 'YYYYMMDD00-YYYYMMDD00'
         # timeframe = "2013111000-2013111100"
@@ -34,7 +40,8 @@ class UsersController < ApplicationController
         @events = eventful.call 'events/search',
             date: timeframe, location: current_user.city
 
+
         # raise .to_yaml
-        
+
     end
 end

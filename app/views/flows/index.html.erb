@@ -9,8 +9,10 @@
   <%= form_tag("/search", method: "get") do %>
     <%= label_tag(:keyword, "Keyword")%>
     <%= text_field(:search, :keyword, required: true) %>
+    <br>
     <%= label_tag(:users, "Friends")%>
-    <%= text_field(:search, :users, required: true) %>
+    <%= text_field(:search, :users, id:"search_users-typeahead", required: true) %>
+    <br>
     <%= label_tag(:timeframe, "Timeframe:") %>
     <%= date_field(:timeframe, :start, required: true) %>
     <%= date_field(:timeframe, :end, required: true) %>
