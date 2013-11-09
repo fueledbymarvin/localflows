@@ -1,0 +1,70 @@
+
+/*
+****
+explanation
+****
+*/
+$color: rgba(168,168,168,0.3);
+#explanation {
+  font-family: Lato, sans-serif;
+  position: absolute;
+  top: 30%;
+  left: 12.5%;
+  width: 35%;
+  color: white;
+  font-size: 1.8em;
+  background: $color;
+  border-radius: (0.5em/1.8);
+  padding: (0.5em/1.8);
+}
+/*
+****
+Signup form
+****
+*/
+#emailform {
+  position: absolute;
+  top: 30%;
+  left: 52.5%;
+  width: 35%;
+  font-family: Lato, sans-serif;
+  background: $color;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+.field {
+  display: inline-block;
+}
+#city-field {
+  width: 68%;
+}
+#state-field {
+  width: 30%;
+}
+#signupbutton{
+  margin-top: 1em;
+  width: 100%;
+  font-weight: bold;
+}
+#login {
+  padding-top: 1em;
+  text-align: center;
+}
+#inner {
+  padding: 0.6em;
+}
+#login1 {
+  font-weight: bold;
+}
+.formfont {
+  font-size: 20px;
+}
+#emailform {
+  color: white;
+}
+a {
+  color: white;
+}
+#form-group label {
+  font-size: 100px;
+}

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-    def self.from_omniauth(auth)
+    def self.from_omniauth(auth, citystate)
         user = find_or_initialize_by(gid: auth.uid)
 
         user.name = auth.extra.raw_info.name
@@ -8,18 +8,19 @@ class User < ActiveRecord::Base
         if auth.extra.raw_info.picture
         	user.image = auth.extra.raw_info.picture
         else
-            user.image = placeholder.jpg
+            user.image = "placeholder.jpg"
         end
 
         user.gaccess = auth.credentials.token
         user.grefresh = auth.credentials.refresh_token
         user.gid = auth.uid
 
-        user.save
+        unless citystate.nil?
+            user.city = citystate[0]
+            user.state = citystate[1]
+        end
 
-        user.gclient(user.gaccess)
-        user.gcal
-        user.eventful
+        user.save
         
         return user
     end

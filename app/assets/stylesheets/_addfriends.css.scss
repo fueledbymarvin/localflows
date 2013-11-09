@@ -1,0 +1,97 @@
+/*datebox*/
+#datebox{
+  position: absolute;
+  top: 35%;
+  left: 33%;
+  width: 35%;
+  background:rgba(168,168,168,0.3);
+  border-radius: 0.5em;
+}
+
+#datetext {
+  position: relative;
+  left: 2.2em;
+  top: 1.3em;
+  color: white;
+  display: inline;
+  font-family: Lato, sans-serif;
+  font-size: 1.4em;
+}
+#dateboxinner {
+  position: relative;
+  display: inline;
+  left: 20%;
+  top: -.23em;
+}
+
+.zipcode {
+  position: relative;
+  width:20%;
+}
+
+/* upper name box*/
+#box{
+  font-family: Lato, sans-serif;
+  position: absolute;
+  top: 44%;
+  left: 33%;
+  width: 35%;
+  height: 10%;
+  background:rgba(168,168,168,0.3);
+  border-radius: 0.5em;
+}
+
+#addfriends {
+  font-family: Lato, sans-serif;
+  font-size: 1.4em;
+  position: relative;
+  float:left;
+  top: 20%;
+  left: 5%;
+  width: 15%;
+  color: white;
+}
+
+
+#friendicon{
+  position: relative;
+  display: inline;
+  float: right;
+  padding-right: 2em;
+  padding-top: 2em;
+}
+.namebox {
+  position: relative;
+  top: 30%;
+}
+
+.friendbutton {
+  display: inline-block;
+  position: relative;
+}
+
+/*posse*/
+#possebox {
+  position: relative;
+  top: 55.5%;
+  left: 33%;
+  width: 35%;
+  height: 20%;
+  background:rgba(168,168,168,0.3);
+  border-radius: 0.5em;
+}
+
+#possetext {
+  position: relative;
+  color: white;
+  font-family: Lato, sans-serif;
+  font-size: 1.4em;
+  top: 0.7em;
+  left: 1em;
+}
+
+.submit {
+  position: absolute;
+  left:33%;
+  top:76%;
+}
