@@ -33,7 +33,7 @@ group :doc do
 end
 
 gem 'httparty'
-gem 'google-api-client'
+gem 'google-api-client', :require => 'google/api_client'
 gem 'omniauth-google-oauth2'
 gem 'eventfulapi'
 
