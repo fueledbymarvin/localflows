@@ -18,10 +18,12 @@ class UsersController < ApplicationController
         # timeframe = "2013111000-2013111100"
         eventful = Eventful::API.new ENV['eventful_key']
 
-        @events = eventful.call 'events/search',
-            date: timeframe, location: current_user.city
-
-        # raise .to_yaml
+        events = eventful.call('events/search', {
+            date: timeframe,
+            location: "#{current_user.city}, #{current_user.state}",
+            page_size: 100,
+            sort_order: "popularity"
+        })["events"]["event"]
         
     end 
 
