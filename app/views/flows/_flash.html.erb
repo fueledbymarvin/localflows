@@ -1,0 +1,4 @@
+<section class="notifications">
+  <% if flash[:notice] %><p class="alert alert-success alert-dismissable"><%= h flash[:notice] %></p><% end %>
+  <% if flash[:error] %><p class="alert alert-danger alert-dismissable"><%= h flash[:error] %></p><% end %>
+</section>
