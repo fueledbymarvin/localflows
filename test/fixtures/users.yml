@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  city: MyString
+  state: MyString
+  gaccess: MyString
+  grefresh: MyString
+  image: MyString
+  gid: MyString
+
+two:
+  name: MyString
+  email: MyString
+  city: MyString
+  state: MyString
+  gaccess: MyString
+  grefresh: MyString
+  image: MyString
+  gid: MyString
