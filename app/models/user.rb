@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
                 }),
                 headers: {'Content-Type' => 'application/json'}
             )
-	      	fb = { name: user.name, busy: Array.new(offset, false) }
+	      	fb = { email: user.email, busy: Array.new(offset, false) }
             result.data.calendars[user.email].busy.each do |event|
                 pos = getPos(start, offset, event.start, event.end)
                 if pos
@@ -82,9 +82,9 @@ class User < ActiveRecord::Base
                 }),
                 headers: {'Content-Type' => 'application/json'}
             )
-            fb = { name: user.name, busy: Array.new(offset, false) }
+            fb = { email: user.email, busy: Array.new(offset, false) }
             result.data.calendars[user.email].busy.each do |event|
-                pos = getPos(event.start, event.end)
+                pos = getPos(start, offset, event.start, event.end)
                 if pos
                     for i in pos[:startPos]..pos[:endPos]
                         fb[:busy][i] = true
@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
     	ids.each do |id|
     		all[id] = freebusy(start, offset, min.midnight.to_datetime.iso8601, max.midnight.to_datetime.iso8601, id)
     	end
-        p all
+
         finalEvents = []
         newEvents = self.prune(events)
     	newEvents.each do |event|
@@ -120,12 +120,12 @@ class User < ActiveRecord::Base
 	    				a = a || all[id][:busy][i]
 	    			end
 	    			unless a
-	    				available << all[id][:name]
+	    				available << all[id][:email]
 	    			end
 	    		end
                 me = false
-                available.each do |name|
-                    if name == self.name
+                available.each do |email|
+                    if email == self.email
                         me = true
                     end
                 end
