@@ -71,10 +71,10 @@ class User < ActiveRecord::Base
 	    rescue
 	    end
 
-	    busy = {}
+	    fb = { name: user.name, busy: {} }
 	    temp = min
 	    until temp == max.tomorrow do
-	    	busy[temp.strftime("%D")] = Array.new(48, false)
+	    	fb[:busy][temp.strftime("%D")] = Array.new(48, false)
 	    	temp = temp.next
 	    end
 	    result.data.calendars[user.email].busy.each do |event|
@@ -90,10 +90,9 @@ class User < ActiveRecord::Base
 	    		endPos = Integer(endPos)
 	    	end
 	    	for i in startPos..endPos
-	    		busy[event.start.strftime("%D")][i] = true
+	    		fb[:busy][event.start.strftime("%D")][i] = true
 	    	end
 	    end
-	    return busy
+	    return fb
     end
-
 end
