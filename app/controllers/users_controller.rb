@@ -51,7 +51,7 @@ class UsersController < ApplicationController
             @events = current_user.group(Date.parse(params[:timeframe][:start]), Date.parse(params[:timeframe][:end]), emails, events["event"])
         end
 
-        raise
+        # raise
     end
 
     ## this action will send an email through event_confirmation mailer

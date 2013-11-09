@@ -46,7 +46,7 @@
         <div id="state-field" class="field">
           <%= select_tag "state", options_for_select(["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]), { required: true, class: "form-control" } %>
         </div>
-        <%= button_tag "Sign up with Google", class: "btn btn-success", id: "signupbutton" %>
+        <%= button_tag "Sign up with Google", action: "new", controller: "users", class: "btn btn-success", id: "signupbutton" %>
       <% end %>
     </div>
       <p id="login"><span id="login1"><a href="/auth/google?origin=login" style="color: #FFFFE0">Log in</a></span> now</p>
