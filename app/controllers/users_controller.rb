@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+
+    def index
+      @users = User.where("name like ?", "%#{params[:q]}%")
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @users }
+        format.json  { render :json => @users.map(&:attributes) }
+      end
+    end
+
     def update
         user = current_user
 
@@ -12,10 +22,10 @@ class UsersController < ApplicationController
     end
 
     def eventful
-        timeframe = params[:timeframe]
+        timeframe = params[:timeframe][:start].delete('-') +
+                    '00-' + params[:timeframe][:end].delete('-') + '00'
 
         # timeframe must be in the form 'YYYYMMDD00-YYYYMMDD00'
-        # timeframe = "2013111000-2013111100"
         eventful = Eventful::API.new ENV['eventful_key']
 
         events = eventful.call('events/search', {
@@ -25,6 +35,5 @@ class UsersController < ApplicationController
             sort_order: "popularity"
         })["events"]["event"]
         
-    end 
-
+    end
 end

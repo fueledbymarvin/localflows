@@ -1,29 +1,18 @@
 <%= current_user.city %>
-<% count = 0 %>
-<% @events["events"]["event"].each do |f|%>
-    <ul>
-        <b><%= f["title"] %></b>
-        <br>
-        <% unless f["description"].nil? %>
-        <%= f["description"].html_safe %>
-        <% end %>
-        <br>
-        <%= f["start_time"] %>
-        <br>
-        <%= f["stop_time"] %>
-        <br>
-        <%= f["venue_name"].upcase %>
-        <br>
-        <%= f["venue_address"].upcase %>
-        <br>
-        <%= f["city_name"].upcase %>
-        <br>
-        <%= f["region_abbr"].upcase %>
-        <br>
-        <% if f["postal_code"].nil? %>
-        	<% count += 1 %>
-        <% end %>
-        <%= f["postal_code"] %>
-        <%= count %>
-    </ul>
+
+<% @events.each do |event|%>
+    <article class="event">
+        <p class="title"><%= event["title"] %></p>
+        <p class="start_time"><%= event["start_time"].strftime("") %></p>
+        <p class="stop_time"><%= event["stop_time"].strftime("") %></p>
+        <p class="venue"><%= event["venue"] %></p>
+        <p class="description">
+            <% if event["description"].nil? %>
+                No description available.
+            <% else %>
+                <%= event["description"].html_safe %>
+            <% end %>
+        </p>
+        <a href="<%= event["url"] %>" target="_blank"><p class="url">More info.</p></a>
+    </article>
 <% end %>
