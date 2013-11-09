@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         source = session[:source] || :root
         session[:source] = nil
+
         redirect_to source, :notice => "Signed in!"
 
     end
