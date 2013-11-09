@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
         source = session[:source] || :root
         session[:source] = nil
         redirect_to source, :notice => "Signed in!"
+
     end
 
     def destroy
