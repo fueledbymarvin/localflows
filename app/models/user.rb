@@ -12,5 +12,7 @@ class User < ActiveRecord::Base
         user.grefresh = auth.credentials.refresh_token
 
         user.save
+        
+        return user
     end
 end
