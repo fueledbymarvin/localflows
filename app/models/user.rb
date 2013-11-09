@@ -171,7 +171,7 @@ class User < ActiveRecord::Base
     					end
     				elsif field == "image"
                         if event["image"].nil?
-                            newEvent[field] = "placeholder.jpg"
+                            newEvent[field] = "assets/placeholder.png"
                         else
                             newEvent[field] = event["image"]["medium"]["url"]
                         end
