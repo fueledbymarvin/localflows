@@ -15,4 +15,8 @@ $(document).ready(function() {
             allowDuplicates: false
         });
     });
+
+    $(".invitebutton").click(function() {
+        setTimeout(alert("Email invitations successfully sent!"), 3000);
+    });
 });

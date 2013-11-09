@@ -52,6 +52,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def invite
+        confirm_event(params[:emails])
+        redirect_to :root, notice: "Invitations successfully sent!"
+    end
+
     ## this action will send an email through event_confirmation mailer
     ## it will be linked to from the page listing search results
     def confirm_event(current_emails)

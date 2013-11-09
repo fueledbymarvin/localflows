@@ -20,13 +20,16 @@
                             <%= event["description"].html_safe %>
                         <% end %>
                     </p>
+                    <%= form_tag(invite_url, :method => :get) do %>
                     <div class="friend-images">
                         <p class="availability alert alert-success"><%= "#{event['available'].length}/#{@nFriends}" %></p>
                         <% event["available"].each do |avail| %>
                             <img src="<%= avail[:image] %>" class="profile-pic">
+                            <%= hidden_field_tag "emails[]", avail[:email] %>
                         <% end %>
                     </div>
-                    <button type="button" class="btn btn-success signupbutton invitebutton">Invite Available Friends</button>
+                    <%= button_tag "Invite Available Friends", action: "invite", controller: "users", class: "btn btn-success signupbutton invitebutton" %>
+                    <% end %>
                 </article>
             </div>
         <% end %>
