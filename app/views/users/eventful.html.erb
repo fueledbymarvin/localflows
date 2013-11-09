@@ -19,5 +19,6 @@
             <% end %>
         </p>
         <a href="<%= event["url"] %>" target="_blank"><p class="url">More info.</p></a>
+        <p class="availability"><%= "#{event['available'].length}/#{@nFriends}" %></p>
     </article>
 <% end %>
