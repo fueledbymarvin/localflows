@@ -7,9 +7,13 @@
 
 <section id="search-events">
   <%= form_tag("/search", method: "get") do %>
-    <%= label_tag(:q, "Timeframe:") %>
-    <%= date_field(:search_events, :start, required: true) %>
-    <%= date_field(:search_events, :end, required: true) %>
+    <%= label_tag(:keyword, "Keyword")%>
+    <%= text_field(:search, :keyword, required: true) %>
+    <%= label_tag(:users, "Friends")%>
+    <%= text_field(:search, :users, required: true) %>
+    <%= label_tag(:timeframe, "Timeframe:") %>
+    <%= date_field(:timeframe, :start, required: true) %>
+    <%= date_field(:timeframe, :end, required: true) %>
     <%= submit_tag("Search") %>
   <% end %>
 </section>
