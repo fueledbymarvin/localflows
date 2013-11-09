@@ -35,6 +35,7 @@ end
 gem 'httparty'
 gem 'google-api-client'
 gem 'omniauth-google-oauth2'
+gem 'eventfulapi'
 
 gem 'passenger'
 gem 'bourbon'
