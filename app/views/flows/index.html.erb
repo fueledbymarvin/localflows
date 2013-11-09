@@ -8,7 +8,8 @@
 <section id="search-events">
   <%= form_tag("/search", method: "get") do %>
     <%= label_tag(:q, "Timeframe:") %>
-    <%= text_field_tag(:timeframe) %>
+    <%= date_field(:search_events, :start, required: true) %>
+    <%= date_field(:search_events, :end, required: true) %>
     <%= submit_tag("Search") %>
   <% end %>
 </section>

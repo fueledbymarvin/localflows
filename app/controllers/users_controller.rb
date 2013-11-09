@@ -26,5 +26,4 @@ class UsersController < ApplicationController
         # raise .to_yaml
         
     end 
-
 end
