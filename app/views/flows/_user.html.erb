@@ -1,0 +1,11 @@
+<section id="user_nav">
+  <%= render 'flows/flash' %>
+  <div id="left">
+    <img src="<%= current_user.image %>" id="userimage" />
+    <p id="username"><%= current_user.name %></p>
+  </div>
+  <div id="right">
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <%= link_to "Back", "/", id: "back" %>
+  </div>
+</section>

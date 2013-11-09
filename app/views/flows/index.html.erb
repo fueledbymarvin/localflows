@@ -1,17 +1,8 @@
 <% if current_user %>
   <!--date box-->
-  <section id="mainbox">
-    <section id="user_nav">
-      <%= render 'flash' %>
-      <div id="left">
-        <img src="<%= current_user.image %>" id="userimage" />
-        <p id="username"><%= current_user.name %></p>
-      </div>
-      <div id="right">
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      </div>
-    </section>
-    <div id="datebox">
+  <section class="mainbox">
+    <%= render 'flows/user' %>
+    <div class="datebox">
       <%= form_tag("/search", method: "get") do %>
         <%= label_tag(:keyword, "Keywords")%>
         <%= text_field(:search, :keyword, { class: "form-control" }) %>
@@ -22,7 +13,7 @@
         <%= label_tag(:timeframe, "Time Frame") %>
         <%= date_field(:timeframe, :start, { required: true, class: "form-control" }) %>
         <%= date_field(:timeframe, :end, { required: true, class: "form-control" }) %>
-        <%= button_tag "Search for Events", class: "btn btn-success", id: "signupbutton" %>
+        <%= button_tag "Search for Events", class: "btn btn-success signupbutton" %>
       <% end %>
     </div>
   </section>
@@ -46,10 +37,10 @@
         <div id="state-field" class="field">
           <%= select_tag "state", options_for_select(["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]), { required: true, class: "form-control" } %>
         </div>
-        <%= button_tag "Sign up with Google", class: "btn btn-success", id: "signupbutton" %>
+        <%= button_tag "Sign up with Google", class: "btn btn-success signupbutton" %>
       <% end %>
     </div>
-      <p id="login"><span id="login1"><a href="/auth/google?origin=login" style="color: #FFFFE0">Log in</a></span> now</p>
+      <p id="login"><span id="login1"><a href="/auth/google?origin=login">Log in</a></span> now</p>
       </form>
     </div>
   </div>
