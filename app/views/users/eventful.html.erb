@@ -3,14 +3,15 @@
 <% @events.each do |event|%>
     <article class="event">
         <p class="title"><%= event["title"] %></p>
-        <% if event["image"].nil? %>
-            <img class="eventimg" src="<%= someshit %>" />
-        <% else %>
-            <img class="eventimg" src="<%= event['image'] %>" />
-        <% end %>
-        <p class="start_time"><%= event["start_time"].strftime("") %></p>
-        <p class="stop_time"><%= event["stop_time"].strftime("") %></p>
-        <p class="venue"><%= event["venue"] %></p>
+        <img class="eventimg" src="<%= event['image'] %>" />
+        <p class="start_time"><%= event["start_time"].strftime("%A, %B %e, %Y, %H:%M%p") %></p>
+        <p class="stop_time">
+            <% if event["stop_time"].nil? %>
+                No end time found.
+            <% else %>
+                <%= event["stop_time"].strftime("%A, %B %e, %Y, %H:%M%p") %>
+            <% end %>
+        <p class="venue"><%= event["venue"].html_safe %></p>
         <p class="description">
             <% if event["description"].nil? %>
                 No description available.
@@ -18,7 +19,7 @@
                 <%= event["description"].html_safe %>
             <% end %>
         </p>
-        <a href="<%= event["url"] %>" target="_blank"><p class="url">More info.</p></a>
+        <p class="url"><a href="<%= event["url"] %>" target="_blank">More info</a>.</p>
         <p class="availability"><%= "#{event['available'].length}/#{@nFriends}" %></p>
     </article>
 <% end %>

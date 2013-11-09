@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
         user.email = auth.extra.raw_info.email
         if auth.extra.raw_info.picture
         	user.image = auth.extra.raw_info.picture
+        else
+            user.image = placeholder.jpg
         end
 
         user.gaccess = auth.credentials.token
@@ -40,8 +42,8 @@ class User < ActiveRecord::Base
     	@calendar ||= self.gclient(nil).discovered_api('calendar', 'v3')
     end
 
-    def freebusy(start, offset, min, max, id)
-    	user = User.find(id)
+    def freebusy(start, offset, min, max, email)
+    	user = User.where(email: email).first
       	begin
             result = self.gclient(user.gaccess).execute(
                 api_method: self.gcal.freebusy.query,
@@ -52,7 +54,7 @@ class User < ActiveRecord::Base
                 }),
                 headers: {'Content-Type' => 'application/json'}
             )
-	      	fb = { email: user.email, busy: Array.new(offset, false) }
+	      	fb = { info: { email: user.email, name: user.name, image: user.image }, busy: Array.new(offset, false) }
             result.data.calendars[user.email].busy.each do |event|
                 pos = getPos(start, offset, event.start, event.end)
                 if pos
@@ -82,7 +84,7 @@ class User < ActiveRecord::Base
                 }),
                 headers: {'Content-Type' => 'application/json'}
             )
-            fb = { email: user.email, busy: Array.new(offset, false) }
+            fb = { info: { email: user.email, name: user.name, image: user.image }, busy: Array.new(offset, false) }
             result.data.calendars[user.email].busy.each do |event|
                 pos = getPos(start, offset, event.start, event.end)
                 if pos
@@ -95,14 +97,14 @@ class User < ActiveRecord::Base
 	    end
     end
 
-    def group(min, max, ids, events)
+    def group(min, max, emails, events)
     	start = min.to_time
     	offset = Integer((max.tomorrow.to_time - min.to_time) / 1800)
     	
-        ids << self.id
+        emails << self.email
     	all = {}
-    	ids.each do |id|
-    		all[id] = freebusy(start, offset, min.midnight.to_datetime.iso8601, max.midnight.to_datetime.iso8601, id)
+    	emails.each do |email|
+    		all[email] = freebusy(start, offset, min.midnight.to_datetime.iso8601, max.midnight.to_datetime.iso8601, email)
     	end
 
         finalEvents = []
@@ -114,18 +116,18 @@ class User < ActiveRecord::Base
 
     		if pos
 		    	available = []
-	    		ids.each do |id|
+	    		emails.each do |email|
 	    			a = false
 	    			for i in pos[:startPos]..pos[:endPos]
-	    				a = a || all[id][:busy][i]
+	    				a = a || all[email][:busy][i]
 	    			end
 	    			unless a
-	    				available << all[id][:email]
+	    				available << all[email][:info]
 	    			end
 	    		end
                 me = false
                 available.each do |email|
-                    if email == self.email
+                    if email[:email] == self.email
                         me = true
                     end
                 end
@@ -135,7 +137,8 @@ class User < ActiveRecord::Base
                 end
 	    	end
     	end
-    	return finalEvents
+
+    	return finalEvents.sort_by { |event| event["available"].length }.reverse
     end
 
     def getPos(start, offset, s, e)
@@ -161,12 +164,16 @@ class User < ActiveRecord::Base
     			newEvent = {}
     			fields.each do |field|
     				if(field == "venue")
-    					newEvent[field] = "#{event['venue_name']}\n#{event['venue_address']}\n#{event['city_name']}, #{event['region_abbr']}"
+    					newEvent[field] = "#{event['venue_name']}<br />#{event['venue_address']}<br />#{event['city_name']}, #{event['region_abbr']}"
     					if event['postal_code']
     						newEvent[field] += " #{event['postal_code']}"
     					end
-    				elsif field == "image" && !event["image"].nil?
-                        newEvent[field] = event["image"]["medium"]["url"]
+    				elsif field == "image"
+                        if event["image"].nil?
+                            newEvent[field] = "placeholder.jpg"
+                        else
+                            newEvent[field] = event["image"]["medium"]["url"]
+                        end
                     else
     					newEvent[field] = event[field]
     				end

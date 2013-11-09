@@ -15,5 +15,26 @@
 //= require turbolinks
 //= require angular
 //= require bootstrap
-//= require jquery.tokeninput
 //= require_tree .
+
+$(document).ready(function() {
+    $.get("/users.json", function(data) {
+        console.log(data);
+
+        var users_list = []
+
+        for (var i=0; i < data.length; i++) {
+            users_list.push(data[i].name + ' (' + data[i].email + ')');
+        }
+
+        // console.log(users_list)
+
+        $('#search_users-typeahead').tokenfield({
+            typeahead: {
+                name: 'tags',
+                local: users_list
+            },
+            allowDuplicates: false
+        });
+    });
+})
