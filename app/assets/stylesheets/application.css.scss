@@ -1,6 +1,3 @@
-@import "bootstrap";
-
-
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -12,5 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  */
+
+ @import "bootstrap";
+ @import "tokenfield-typeahead";
+ @import "docs";
+ @import "pygments-manni";
+ @import "bootstrap-tokenfield";
