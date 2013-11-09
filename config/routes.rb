@@ -8,5 +8,7 @@ Localflows::Application.routes.draw do
 
   match 'new', to: "users#new", as: "new", via: [:get]
 
+  match 'invite', to: "users#invite", as: "invite", via: [:get]
+
   resources :users
  end
