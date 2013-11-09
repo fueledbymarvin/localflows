@@ -1,44 +1,44 @@
-<!---background and logo-->
-<div id="bg">
-  <img src="assets/image1.jpg" alt="fuck">
-</div>
-<img src="assets/logo.png" id="logo" />
-
 <% if current_user %>
-  <section id="user_nav">
-    Welcome <%= current_user.name %>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  </section>
-
-  <section id="search-events">
-    <%= form_tag("/search", method: "get") do %>
-      <%= label_tag(:keyword, "Keyword")%>
-      <%= text_field(:search, :keyword, required: true) %>
-      <br>
-      <%= label_tag(:users, "Friends")%>
-      <%= text_field(:search, :users, id:"search_users-typeahead", required: true) %>
-      <br>
-      <%= label_tag(:timeframe, "Timeframe:") %>
-      <%= date_field(:timeframe, :start, required: true) %>
-      <%= date_field(:timeframe, :end, required: true) %>
-      <%= submit_tag("Search") %>
-    <% end %>
+  <!--date box-->
+  <section id="mainbox">
+    <section id="user_nav">
+      <%= render 'flash' %>
+      <div id="left">
+        <img src="<%= current_user.image %>" id="userimage" />
+        <p id="username"><%= current_user.name %></p>
+      </div>
+      <div id="right">
+        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      </div>
+    </section>
+    <div id="datebox">
+      <%= form_tag("/search", method: "get") do %>
+        <%= label_tag(:keyword, "Keywords")%>
+        <%= text_field(:search, :keyword, { class: "form-control" }) %>
+        <br>
+        <%= label_tag(:users, "Friends")%>
+        <%= text_field(:search, :users, { id:"search_users-typeahead", required: true, class: "form-control" }) %>
+        <br>
+        <%= label_tag(:timeframe, "Time Frame") %>
+        <%= date_field(:timeframe, :start, { required: true, class: "form-control" }) %>
+        <%= date_field(:timeframe, :end, { required: true, class: "form-control" }) %>
+        <%= button_tag "Search for Events", class: "btn btn-success", id: "signupbutton" %>
+      <% end %>
+    </div>
   </section>
 <% else %>
   <!--blurb-->
   <div id="explanation">
     <div id='inner'>
-      <p class="pitch">4 million events,</p>
-      <p class="pitch">Hundreds of cities across the world,</p>
+      <p class="pitch">4 million events.</p>
+      <p class="pitch">Hundreds of cities across the world.</p>
       <p class="pitch">Your friends and you.</p>
     </div>
   </div>
   <!--emailform-->
   <div id="emailform">
     <div id="inner">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :class => "alert alert-danger" %>
-      <% end %>
+      <%= render 'flash' %>
       <%= form_tag(new_url, :method => :get) do %>
         <div id="city-field" class="field">
           <%= text_field_tag 'city', nil, { required: true, placeholder: "Your City", class: "form-control" } %>

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
         if auth.extra.raw_info.picture
         	user.image = auth.extra.raw_info.picture
         else
-            user.image = "placeholder.jpg"
+            user.image = "assets/placeholder.png"
         end
 
         user.gaccess = auth.credentials.token

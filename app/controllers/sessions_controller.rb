@@ -7,19 +7,19 @@ class SessionsController < ApplicationController
             else
                 user = User.from_omniauth(env["omniauth.auth"], nil)
                 session[:user_id] = user.id
-                source = session[:source] || :root
+                # source = session[:source] || :root
                 session[:source] = nil
 
-                redirect_to source, :notice => "Signed in!"
+                redirect_to :root, :notice => "Signed in!"
             end
         else
             citystate = env["omniauth.origin"].split(",")
             user = User.from_omniauth(env["omniauth.auth"], citystate)
             session[:user_id] = user.id
-            source = session[:source] || :root
+            # source = session[:source] || :root
             session[:source] = nil
 
-            redirect_to source, :notice => "Signed in!"
+            redirect_to :root, :notice => "Successfully created account!"
         end
     end
 
