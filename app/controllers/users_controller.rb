@@ -14,6 +14,11 @@ class UsersController < ApplicationController
       end
     end
 
+    def edit
+        @user = current_user
+        redirect_to :root
+    end
+
     def update
         user = current_user
 

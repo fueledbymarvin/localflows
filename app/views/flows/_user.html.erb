@@ -6,6 +6,7 @@
   </div>
   <div id="right">
     <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <%= link_to "Update profile", edit_user_path(current_user), id: "edit_user" %>
     <%= link_to "Back", "/", id: "back" %>
   </div>
 </section>

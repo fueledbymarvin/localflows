@@ -43,14 +43,14 @@ class User < ActiveRecord::Base
     	@calendar ||= self.gclient(nil).discovered_api('calendar', 'v3')
     end
 
-    def freebusy(start, offset, min, max, email)
+    def freebusy(start, offset, email)
     	user = User.where(email: email).first
       	begin
             result = self.gclient(user.gaccess).execute(
                 api_method: self.gcal.freebusy.query,
                 body: JSON.dump({
-                    timeMin: min,
-                    timeMax: max,
+                    timeMin: start.to_datetime.iso8601,
+                    timeMax: (start + offset * 1800).to_datetime.iso8601,
                     items: [ { id: user.email} ]
                 }),
                 headers: {'Content-Type' => 'application/json'}
@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
 	      	fb = { info: { email: user.email, name: user.name, image: user.image }, busy: Array.new(offset, false) }
             result.data.calendars[user.email].busy.each do |event|
                 pos = getPos(start, offset, event.start, event.end)
-                if pos
+                unless pos.nil?
                     for i in pos[:startPos]..pos[:endPos]
                         fb[:busy][i] = true
                     end
@@ -79,8 +79,8 @@ class User < ActiveRecord::Base
             result = self.gclient(user.gaccess).execute(
                 api_method: self.gcal.freebusy.query,
                 body: JSON.dump({
-                    timeMin: min,
-                    timeMax: max,
+                    timeMin: start.to_datetime.iso8601,
+                    timeMax: (start + offset * 1800).to_datetime.iso8601,
                     items: [ { id: user.email} ]
                 }),
                 headers: {'Content-Type' => 'application/json'}
@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
             fb = { info: { email: user.email, name: user.name, image: user.image }, busy: Array.new(offset, false) }
             result.data.calendars[user.email].busy.each do |event|
                 pos = getPos(start, offset, event.start, event.end)
-                if pos
+                unless pos.nil?
                     for i in pos[:startPos]..pos[:endPos]
                         fb[:busy][i] = true
                     end
@@ -100,12 +100,17 @@ class User < ActiveRecord::Base
 
     def group(min, max, emails, events)
     	start = min.to_time
+
+        ## Integer((max.tomorrow.to_time - min.to_time) is in seconds
     	offset = Integer((max.tomorrow.to_time - min.to_time) / 1800)
     	
+        # append user's own email
         emails << self.email
+
+        # getting all emails' free/busy values
     	all = {}
     	emails.each do |email|
-    		all[email] = freebusy(start, offset, min.midnight.to_datetime.iso8601, max.midnight.to_datetime.iso8601, email)
+    		all[email] = freebusy(start, offset, email)
     	end
 
         finalEvents = []
@@ -143,7 +148,7 @@ class User < ActiveRecord::Base
     end
 
     def getPos(start, offset, s, e)
-    	if(s.to_time - start < 0 || e.to_time - (start + offset * 1800) > 0)
+    	if(s.to_time < start || e.to_time > (start + offset * 1800))
     		return nil
     	else
     		startPos = Integer((s.to_time - start) / 1800)
