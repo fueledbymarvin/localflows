@@ -19,4 +19,29 @@ $(document).ready(function() {
     $(".invitebutton").click(function() {
         setTimeout(alert("Email invitations successfully sent!"), 3000);
     });
+
+    function getPosition() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+
+                geocoder = new google.maps.Geocoder();
+
+                var lat = position.coords.latitude
+                var lng = position.coords.longitude
+
+                var latlng = new google.maps.LatLng(lat, lng)
+
+                geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        
+                        console.log(results[4].formatted_address)
+                        return results[4]
+                    }
+                })
+            })
+        }
+    }
+
+    getPosition()
+
 });
