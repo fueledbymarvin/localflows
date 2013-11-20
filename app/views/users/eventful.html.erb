@@ -1,7 +1,9 @@
 <section class="mainbox">
     <%= render 'flows/user' %>
     <% if !@events.nil? %>
-        <div class="datebox"><p class="resultboxtext">Your Adventures in <%= "#{current_user.city}, #{current_user.state}" %></p></div>
+        <div class="datebox"><p class="resultboxtext">
+            Your Adventures in <%= "#{params["search"]["city"]}, #{params["search"]["state"]}" %>
+        </p></div>
         <% @events.each do |event|%>
             <div class="datebox eventbox">
                 <article class="event">

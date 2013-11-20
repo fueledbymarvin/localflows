@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
         events = current_user.eventful.call('events/search', {
             date: timeframe,
-            location: "#{current_user.city}, #{current_user.state}",
+            location: "#{params["search"]["city"]}, #{params["search"]["state"]}",
             page_size: 100,
             sort_order: "popularity",
             keywords: params[:search][:keyword]
