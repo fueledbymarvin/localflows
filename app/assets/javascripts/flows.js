@@ -33,8 +33,12 @@ $(document).ready(function() {
 
                 geocoder.geocode({'latLng': latlng}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
-                        
-                        console.log(results[4].formatted_address)
+                        results_string = results[4].formatted_address.split(', ')
+                        city = results_string[0]
+                        state = results_string[1]
+                        $("#city-field").val(city)
+                        $("#state-field").val(state)
+                        console.log(city)
                         return results[4]
                     }
                 })

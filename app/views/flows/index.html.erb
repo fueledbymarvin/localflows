@@ -7,6 +7,11 @@
         <%= label_tag(:keyword, "Keywords")%>
         <%= text_field(:search, :keyword, { class: "form-control" }) %>
         <br>
+        <%= label_tag(:city, "City")%>
+        <%= text_field(:search, :city, { required: true, class: "form-control", id: "city-field" })%>
+        <%= label_tag(:state, "State")%>
+        <%= select_tag "state", options_for_select(["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]), { required: true, class: "form-control", id: "state-field" } %>
+        <br>
         <%= label_tag(:users, "Friends")%>
         <%= text_field(:search, :users, { id:"search_users-typeahead", required: true, class: "form-control" }) %>
         <br>
