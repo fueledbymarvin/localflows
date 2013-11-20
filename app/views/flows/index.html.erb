@@ -47,17 +47,12 @@
     <div id="inner">
       <%= render 'flash' %>
       <%= form_tag(new_url, :method => :get) do %>
-        <div id="city-field" class="field">
-          <%= text_field_tag 'city', nil, { required: true, placeholder: "Your City", class: "form-control" } %>
-        </div>
-        <div id="state-field" class="field">
-          <%= select_tag "state", options_for_select(FlowsControllerHelper::STATES_LIST), { required: true, class: "form-control" } %>
-        </div>
         <%= button_tag "Sign up with Google", action: "new", controller: "users", class: "btn btn-success signupbutton" %>
+        <%= button_to "Log in", "/auth/google?origin=login", class: "btn btn-info signupbutton" %>
       <% end %>
     </div>
-      <p id="login"><span id="login1"><a href="/auth/google?origin=login">Log in</a></span> now</p>
-      </form>
+    
+
     </div>
   </div>
 <% end %>
