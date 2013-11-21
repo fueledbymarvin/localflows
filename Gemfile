@@ -37,6 +37,8 @@ gem 'google-api-client', require: 'google/api_client'
 gem 'omniauth-google-oauth2'
 gem 'eventfulapi', require: 'eventful/api'
 
+gem 'google-analytics-rails'
+
 gem 'simple_form'
 gem 'bootstrap-sass'
 

@@ -1,6 +1,8 @@
 Localflows::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  GA.traker = "UA-25655664-3"
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

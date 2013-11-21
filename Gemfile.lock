@@ -61,6 +61,7 @@ GEM
     extlib (0.9.16)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    google-analytics-rails (0.0.4)
     google-api-client (0.6.4)
       addressable (>= 2.3.2)
       autoparse (>= 0.3.3)
@@ -206,6 +207,7 @@ DEPENDENCIES
   bourbon
   coffee-rails (~> 4.0.0)
   eventfulapi
+  google-analytics-rails
   google-api-client
   httparty
   jbuilder (~> 1.2)
