@@ -1,17 +1,27 @@
 ## To Do List
 
+Priority:
+
+1. formatting events listing page
+- pagination
+- filters and sorting (angular?) 
+
+2. email view formatting
+
+3. animated loading icon
+
+4. show events where not everyone is free
+
+Backburner:
+
 1. make an about page
 
-2. email formatting
+2. groupme API
 
-3. groupme API
+3. cache gcal calendar freebusy data to speed up load times
 
-4. formatting events listing (pagination)
+4. way to list users?
 
-5. test backend
+5. create custom events
 
-6. cache gcal calendar freebusy data to speed up load times
-
-7. animated loading icon
-
-8. way to list users?
+6. show event on map
