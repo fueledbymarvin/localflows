@@ -15,7 +15,8 @@ ENV['google_maps_key'] = "AIzaSyClGdFH3vqDKCousZQS8vr3O7b7fZX4POk"
 ENV['redirect_uri'] = if Rails.env.development?
                         'http://localhost:3000/auth/google/callback'
                       elsif Rails.env.production?
-                        'http://guarded-sands-6345.herokuapp.com/auth/google/callback'
+                        # 'http://guarded-sands-6345.herokuapp.com/auth/google/callback'
+                        'http://localflo.ws/auth/google/callback'
                       end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
