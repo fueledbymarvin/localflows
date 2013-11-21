@@ -50,7 +50,7 @@ class UsersController < ApplicationController
         if(events.nil?)
             @events = nil
         else
-            @events = current_user.group(Date.parse(params[:timeframe][:start]), Date.parse(params[:timeframe][:end]), current_emails, events["event"])
+            @events = current_user.group(Date.parse(params[:timeframe][:start]), Date.parse(params[:timeframe][:end]), @current_user.email, current_emails, events["event"])
         end
     end
 

@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
 	    end
     end
 
-    def group(min, max, emails, events)
+    def group(min, max, user_email, emails, events)
     	start = min.to_time
 
         ## Integer((max.tomorrow.to_time - min.to_time) is in seconds
@@ -102,8 +102,11 @@ class User < ActiveRecord::Base
         # append user's own email
         emails << self.email
 
-        # getting all emails' free/busy values
+        # getting current user and all emails' free/busy values
     	all = {}
+
+        all[user_email] = freebusy(start, offset, email)
+
     	emails.each do |email|
     		all[email] = freebusy(start, offset, email)
     	end
@@ -138,6 +141,9 @@ class User < ActiveRecord::Base
                 end
 	    	end
     	end
+
+        raise
+        
 
     	return finalEvents.sort_by { |event| event["available"].length }.reverse
     end
