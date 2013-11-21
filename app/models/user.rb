@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-    def self.from_omniauth(auth, citystate)
+    def self.from_omniauth(auth)
         user = find_or_initialize_by(gid: auth.uid)
 
         user.name = auth.extra.raw_info.name
@@ -14,11 +14,6 @@ class User < ActiveRecord::Base
         user.gaccess = auth.credentials.token
         user.grefresh = auth.credentials.refresh_token
         user.gid = auth.uid
-
-        unless citystate.nil?
-            user.city = citystate[0]
-            user.state = citystate[1]
-        end
 
         user.save
         

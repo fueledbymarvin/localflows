@@ -22,9 +22,6 @@ class UsersController < ApplicationController
     def update
         user = current_user
 
-        user.city = params[:user][:city]
-        user.state = params[:user][:state]
-
         user.save
 
         redirect_to :root

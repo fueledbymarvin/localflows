@@ -13,8 +13,7 @@ class SessionsController < ApplicationController
                 redirect_to :root, :notice => "Signed in!"
             end
         else
-            citystate = env["omniauth.origin"].split(",")
-            user = User.from_omniauth(env["omniauth.auth"], citystate)
+            user = User.from_omniauth(env["omniauth.auth"])
             session[:user_id] = user.id
             # source = session[:source] || :root
             session[:source] = nil
