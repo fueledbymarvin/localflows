@@ -1,1 +1,17 @@
-LOCALFLOWS
+## To Do List
+
+1. make an about page
+
+2. email formatting
+
+3. groupme API
+
+4. formatting events listing (pagination)
+
+5. test backend
+
+6. cache gcal calendar freebusy data to speed up load times
+
+7. animated loading icon
+
+8. way to list users?
