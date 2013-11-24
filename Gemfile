@@ -44,7 +44,7 @@ gem 'bootstrap-sass'
 
 gem 'passenger'
 gem 'bourbon'
-gem 'angularjs-rails'
+# gem 'angularjs-rails'
 
 group :development, :test do
   gem 'better_errors'
@@ -54,6 +54,7 @@ end
 
 group :production do
     gem 'rails_12factor'
+    gem 'newrelic_rpm'
 end
 
 # Use ActiveModel has_secure_password
